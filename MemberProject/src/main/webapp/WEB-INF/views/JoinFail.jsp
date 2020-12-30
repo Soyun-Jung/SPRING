@@ -7,14 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="member-login">
-		아이디 : <input type="text" name="mid"> <br>
-		비밀번호 : <input type="password" name="mpwd"><br>
-		<input type="submit" value="로그인">
-	</form>
-
+	회원가입 실패 ㅠㅠ
 	
+	<a href="goJoin">다시</a><br>
 	<a href="./">메인으로</a>
-
 </body>
 </html>

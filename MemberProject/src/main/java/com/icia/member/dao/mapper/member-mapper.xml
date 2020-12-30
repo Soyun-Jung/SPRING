@@ -5,6 +5,40 @@
  <mapper namespace="Member">
 
  	<insert id="insertMember" parameterType="member">
- 		INSERT INTO SMEMBER(MID,MPWD,MNAME,MPHONE,MEMAIL,MBIRTH) VALUES(#{mid},#{mpassword},#{mname},#{mphone},#{memail},#{mbirth})
+ 		INSERT INTO SMEMBER(MID,MPWD,MNAME,MPHONE,MEMAIL,MBIRTH) VALUES(#{mid},#{mpwd},#{mname},#{mphone},#{memail},#{mbirth})
  	</insert>
+ 	
+ 	 <select id="checkId" parameterType="member" resultType="int">
+ 		SELECT COUNT(*) FROM SMEMBER WHERE MID=#{mid}
+ 	</select>
+ 	
+ 	 <select id="checkPw" parameterType="member" resultType="int">
+ 		SELECT COUNT(*) FROM SMEMBER WHERE MID=#{mid} AND MPWD=#{mpwd}
+ 	</select>
+ 	
+  	 <select id="checkPw2" parameterType="member" resultType="member">
+ 		SELECT * FROM SMEMBER WHERE MID=#{mid} AND MPWD=#{mpwd}
+ 	</select>
+ 	
+ 	<select id="getMemberList" parameterType="member" resultType="member">
+ 		SELECT * FROM SMEMBER ORDER BY MID DESC
+ 	</select>
+ 	 
+ 	<select id="getMemberView" parameterType="String" resultType="member">
+ 		SELECT * FROM SMEMBER WHERE MID=#{mid}
+ 	</select>
+ 	
+ 	<delete id="memberDelete" parameterType="String">
+ 		DELETE FROM SMEMBER WHERE MID=#{mid}
+ 	</delete>
+ 	
+ 	<update id="memberUpdate" parameterType="member">
+ 		UPDATE SMEMBER SET MPWD=#{mpwd}, MEMAIL=#{memail}, MPHONE=#{mphone} WHERE MID=#{mid}
+ 		
+ 		<selectKey resultType="member" keyProperty="mid,mpwd,mname,mphone,memail,mbirth" order="AFTER">
+ 		SELECT * FROM SMEMBER WHERE MID=#{mid} 
+ 		</selectKey>
+ 		
+ 	</update>
+ 	
  </mapper>

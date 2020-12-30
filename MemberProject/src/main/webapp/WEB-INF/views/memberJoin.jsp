@@ -19,7 +19,7 @@
 			</tr>
 			<tr>
 				<td>비밀번호 :</td>
-				<td><input type="password" name="mpassword"
+				<td><input type="password" name="mpwd"
 					placeholder="15자 이내로 입력하세요."></td>
 			</tr>
 			<tr>
@@ -44,6 +44,8 @@
 			</tr>
 		</table>
 	</form>
+	
+	<a href="./">메인으로</a>
 
 
 </body>
