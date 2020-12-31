@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.icia.member.dto.MemberDTO;
@@ -27,6 +30,9 @@ import com.icia.member.service.MemberService;
 public class HomeController {
 	
 	ModelAndView mav;
+
+	@Autowired
+	private HttpSession session;
 	
 	@Autowired
 	private MemberService ms;
@@ -109,6 +115,7 @@ public class HomeController {
 		if(result==1) {
 			mav.addObject("msg", "삭세성공");
 			/* model.addAttribute("msg", "삭제 성공"); */
+			session.setAttribute("msg", "삭제성공");
 			mav.setViewName("redirect:/MemberList");
 			
 		} else {
@@ -131,6 +138,30 @@ public class HomeController {
 		
 		mav=ms.memberUpdate(member);
 		return mav;
+	}
+	
+	@RequestMapping(value = "/memberlogout")
+	public String memberlogout() {
+		
+		session.invalidate();
+		
+		return "login";
+	}
+	
+	@RequestMapping(value = "/idoverlap")
+	public @ResponseBody String idoverlap(@RequestParam("mid") String mid) {
+		//@responseBody : text를 그대로 리턴할 수 있게 만들어 주는 어노테이션
+		System.out.println("ajax로 넘어온 값 확인 : "+mid);
+
+		return ms.idoverlap(mid);
+	}
+	
+	@RequestMapping(value = "/memberviewajax")
+	public @ResponseBody MemberDTO getMemberViewAjax(@RequestParam("mid") String mid) {
+		System.out.println("controller : "+mid);
+		MemberDTO result= ms.getMemberViewAjax(mid);
+		System.out.println("controller2 : " + mid);
+		return result;
 	}
 	
 }

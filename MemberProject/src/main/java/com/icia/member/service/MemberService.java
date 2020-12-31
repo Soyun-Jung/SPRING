@@ -101,7 +101,7 @@ public class MemberService {
 	public ModelAndView memberUpdate(MemberDTO member) {
 		// TODO Auto-generated method stub
 		mav=new ModelAndView();
-		
+		//String mid=(String) session.getAttribute("loginId");
 		MemberDTO newinfo = new MemberDTO();
 		newinfo = dao.memberUpdate(member);
 		mav.addObject("member", newinfo);
@@ -109,6 +109,25 @@ public class MemberService {
 		
 		
 		return mav;
+	}
+
+	public String idoverlap(String mid) {
+		int result=dao.idoverlap(mid);
+		String canuse=null;
+		if(result==0) {
+			canuse="ok";
+		}else {
+			canuse="no";
+		}
+		
+		return canuse;
+	}
+
+	public MemberDTO getMemberViewAjax(String mid) {
+		System.out.println("service : "+mid);
+		MemberDTO member=dao.getMemberView(mid);
+		System.out.println("service2 : " + mid);
+		return member;
 	}
 	
 	

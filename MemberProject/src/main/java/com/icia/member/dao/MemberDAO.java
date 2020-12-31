@@ -25,7 +25,8 @@ public class MemberDAO {
 	public int checkMember(MemberDTO member) {
 		// TODO Auto-generated method stub
 		int result = 0;
-		int idresult = sql.selectOne("Member.checkId", member);
+		String mid=member.getMid();
+		int idresult = sql.selectOne("Member.checkId", mid);
 		System.out.println("아이디 : " + idresult);
 		
 		if(idresult>=1) {
@@ -62,6 +63,12 @@ public class MemberDAO {
 		sql.update("Member.memberUpdate", member);
 		System.out.println(member);
 		return member;
+	}
+
+	public int idoverlap(String mid) {
+		// TODO Auto-generated method stub
+		return sql.selectOne("Member.checkId", mid);
+		
 	}
 
 	

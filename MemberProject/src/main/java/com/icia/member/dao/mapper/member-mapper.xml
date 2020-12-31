@@ -8,7 +8,7 @@
  		INSERT INTO SMEMBER(MID,MPWD,MNAME,MPHONE,MEMAIL,MBIRTH) VALUES(#{mid},#{mpwd},#{mname},#{mphone},#{memail},#{mbirth})
  	</insert>
  	
- 	 <select id="checkId" parameterType="member" resultType="int">
+ 	 <select id="checkId" parameterType="String" resultType="int">
  		SELECT COUNT(*) FROM SMEMBER WHERE MID=#{mid}
  	</select>
  	
@@ -37,8 +37,7 @@
  		
  		<selectKey resultType="member" keyProperty="mid,mpwd,mname,mphone,memail,mbirth" order="AFTER">
  		SELECT * FROM SMEMBER WHERE MID=#{mid} 
- 		</selectKey>
- 		
+ 		</selectKey>		
  	</update>
  	
  </mapper>

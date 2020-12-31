@@ -22,6 +22,7 @@
 				<td>${member.getMid()}</td>
 				<input type="hidden" name="mid" value="${member.getMid()}">
 				<td><input type="password" name="mpwd" placeholder="${member.getMpwd()}"></td>
+				<input type="text" name="mid" value="${member.getMid()}" readonly>
 				<td>${member.getMname()}</td>
 				<td><input type="text" name="mphone" placeholder="${member.getMphone()}"></td>
 				<td><input type="text" name="memail" placeholder="${member.getMemail()}"></td>
