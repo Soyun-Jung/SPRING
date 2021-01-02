@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="Board">
+
+ 	<insert id="writeBoard" parameterType="board">
+ 		INSERT INTO BOARD_SY VALUES(BOARDSEQ.NEXTVAL,#{bwriter},#{bpwd},#{btitle},#{bcontents},DEFAULT,0)
+ 	</insert>
+ 	
+ 	<select id="boardList" resultType="board">
+ 		SELECT BNUMBER, BTITLE, BWRITER, BDATE, BCONTENTS FROM BOARD_SY ORDER BY BNUMBER
+ 	</select>
+ 	
+ 	 <select id="boardview" parameterType="String" resultType="board">
+ 		SELECT * FROM BOARD_SY WHERE BNUMBER=#{bnumber}
+ 	</select>
+ </mapper>
