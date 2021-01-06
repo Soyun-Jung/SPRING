@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="Member">
+
+ 	<insert id="sighUp" parameterType="member">
+ 		INSERT INTO SPRING_MEMBER VALUES(#{mid},#{mpwd},#{mname},#{mbirth},#{memail},#{mnumber},#{madd})
+ 	</insert>
+ 	
+ 	 <select id="checkId" parameterType="String" resultType="int">
+ 		SELECT COUNT(*) FROM SPRING_MEMBER WHERE MID=#{mid}
+ 	</select>
+ 	
+ 	 <select id="checkPw" parameterType="member" resultType="member">
+ 		SELECT MNAME, MID FROM SPRING_MEMBER WHERE MID=#{mid} AND MPWD=#{mpwd}
+ 	</select>
+ 	
+ 	<select id="getMemberList" parameterType="member" resultType="member">
+ 		SELECT * FROM SPRING_MEMBER ORDER BY MID DESC
+ 	</select>
+ 	 
+ 	<select id="getMemberView" parameterType="String" resultType="member">
+ 		SELECT * FROM SPRING_MEMBER WHERE MID=#{mid}
+ 	</select>
+ 	
+ 	<delete id="memberDelete" parameterType="String">
+ 		DELETE FROM SPRING_MEMBER WHERE MID=#{mid}
+ 	</delete>
+ 	
+ 	<update id="memberUpdate" parameterType="member">
+ 		UPDATE SPRING_MEMBER SET MPWD=#{mpwd}, MEMAIL=#{memail}, MPHONE=#{mphone} WHERE MID=#{mid}
+ 		
+ 		<selectKey resultType="member" keyProperty="mid,mpwd,mname,mphone,memail,mbirth" order="AFTER">
+ 		SELECT * FROM SPRING_MEMBER WHERE MID=#{mid} 
+ 		</selectKey>		
+ 	</update>
+ 	
+ </mapper>
